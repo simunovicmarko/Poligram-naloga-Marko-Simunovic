@@ -18,9 +18,10 @@ namespace Naloga
         private static Pole[] poles = {
             new Pole(){xi = 0, hi = 0.1},
             new Pole(){xi = 0.1, hi = 0.4},
-            new Pole(){xi = 0.5, hi = 0.4},
-            new Pole(){xi = 0.6, hi = 0.4},
-            new Pole(){xi = 0.7, hi = 1},
+            new Pole(){xi = 0.5, hi = 0.6},
+            new Pole(){xi = 0.6, hi = 0.9},
+            new Pole(){xi = 0.7, hi = 0.1},
+            new Pole(){xi = 0.8, hi = 1},
         };
 
         private Pole[] GeneratePoles(int length = 10)
@@ -74,8 +75,11 @@ namespace Naloga
                 string? input = Console.ReadLine();
                 if (input != null)
                 {
+                    input = input.Replace('.', ',');
                     KeyValuePair<string, string> coordinates = Split(input);
-                    poles[i] = new Pole() { xi = double.Parse(coordinates.Key), hi = double.Parse(coordinates.Value) };
+                    double x = Convert.ToDouble(coordinates.Key);
+                    double y = Convert.ToDouble(coordinates.Value);
+                    poles[i] = new Pole() { xi = x, hi = y };
                 }
             }
         }
@@ -83,7 +87,7 @@ namespace Naloga
         public int execute()
         {
             UI();
-            
+
             int counter = 2;
             Pole firstPole = poles[0];
             Pole lastPole = poles[poles.Length - 1];
@@ -98,7 +102,7 @@ namespace Naloga
                 }
             }
 
-
+            Console.WriteLine(counter);
             return counter;
         }
 

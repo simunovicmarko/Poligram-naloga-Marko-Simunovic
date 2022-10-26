@@ -90,6 +90,7 @@ namespace Naloga
                 int counter = 0;
                 swapFromPivotToTheEnd(ref arr, ref counter);
                 swapFromPivotToTheStart(ref arr, ref counter);
+                Console.WriteLine(counter);
                 return counter;
             }
             return 0;
