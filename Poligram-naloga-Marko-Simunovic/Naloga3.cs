@@ -70,17 +70,29 @@ namespace Naloga
         }
 
 
+        private void UI()
+        {
+            System.Console.WriteLine("Vnesite vrstico:");
+            this.input = Console.ReadLine();
+
+        }
         public int execute(int len = 10)
         {
-            char[] arr = input.ToCharArray();
-            // FOR TESTiN PURPOSES
-            // arr = GenerateInput(len).ToCharArray();
-            System.Console.WriteLine(arr);
+            UI();
+            if (this.input != null)
+            {
 
-            int counter = 0;
-            swapFromPivotToTheEnd(ref arr, ref counter);
-            swapFromPivotToTheStart(ref arr, ref counter);
-            return counter;
+                char[] arr = input.ToCharArray();
+                // FOR TESTiN PURPOSES
+                // arr = GenerateInput(len).ToCharArray();
+                System.Console.WriteLine(arr);
+
+                int counter = 0;
+                swapFromPivotToTheEnd(ref arr, ref counter);
+                swapFromPivotToTheStart(ref arr, ref counter);
+                return counter;
+            }
+            return 0;
         }
     }
 }

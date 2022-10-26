@@ -8,8 +8,48 @@ namespace Naloga
 
         static void Main(string[] args)
         {
-            Naloga1 n1 = new Naloga1();
-            n1.execute();
+            while (true)
+            {
+
+                System.Console.WriteLine("Poligram - Naloge - Marko Simunovic");
+                System.Console.WriteLine("Izberite nalogo:");
+                System.Console.WriteLine("1. Naloga 1");
+                System.Console.WriteLine("2. Naloga 2");
+                System.Console.WriteLine("3. Naloga 3");
+                string? inputString = Console.ReadLine();
+                if (inputString != null)
+                {
+                    try
+                    {
+                        int selection = int.Parse(inputString);
+                        switch (selection)
+                        {
+                            case 1:
+                                Naloga1 n1 = new Naloga1();
+                                n1.execute();
+                                break;
+                            case 2:
+                                Naloga2 n2 = new Naloga2();
+                                n2.execute();
+                                break;
+                            case 3:
+                                Naloga3 n3 = new Naloga3();
+                                n3.execute();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        break;
+                    }
+                }
+                else break;
+            }
+
+            // Naloga1 n1 = new Naloga1();
+            // n1.execute();
             // Naloga2 n2 = new Naloga2();
             // var watch = new System.Diagnostics.Stopwatch();
             // watch.Start();
@@ -23,7 +63,7 @@ namespace Naloga
             // }
             // watch.Stop();
             // System.Console.WriteLine((double)watch.ElapsedMilliseconds / 1000);
-            
+
             // n3.execute();
         }
     }

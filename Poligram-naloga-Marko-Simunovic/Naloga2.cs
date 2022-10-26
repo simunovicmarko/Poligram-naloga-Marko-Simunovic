@@ -23,16 +23,17 @@ namespace Naloga
             new Pole(){xi = 0.7, hi = 1},
         };
 
-        private Pole[] GeneratePoles(int length = 10){
+        private Pole[] GeneratePoles(int length = 10)
+        {
             Pole[] poles = new Pole[length];
-            
+
             Random random = new Random();
-            poles[0] = new Pole(){xi=0, hi=random.NextDouble()};
+            poles[0] = new Pole() { xi = 0, hi = random.NextDouble() };
             double previous = 0;
             for (int i = 1; i < length; i++)
             {
-                double x = ((double)random.Next(1,3))/10;
-                poles[i] = new Pole(){xi=previous + x, hi=random.NextDouble()};
+                double x = ((double)random.Next(1, 3)) / 10;
+                poles[i] = new Pole() { xi = previous + x, hi = random.NextDouble() };
                 previous += x;
             }
 
@@ -54,29 +55,52 @@ namespace Naloga
             return y < (line.k * x + line.n);
         }
 
+
+        private KeyValuePair<string, string> Split(string input)
+        {
+            string[] output = input.Split(' ', 2);
+            return new KeyValuePair<string, string>(output[0], output[1]);
+        }
+
+
+        private void UI()
+        {
+            System.Console.WriteLine("Vnesite število drogov:");
+            numberOfPoles = int.Parse(Console.ReadLine());
+            poles = new Pole[numberOfPoles];
+            for (int i = 0; i < numberOfPoles; i++)
+            {
+                System.Console.WriteLine("Vnesite oddaljenost droga in njegovo višino:");
+                string? input = Console.ReadLine();
+                if (input != null)
+                {
+                    KeyValuePair<string, string> coordinates = Split(input);
+                    poles[i] = new Pole() { xi = double.Parse(coordinates.Key), hi = double.Parse(coordinates.Value) };
+                }
+            }
+        }
+
         public int execute()
         {
-            int counter = 2;
-
-            poles = GeneratePoles();
+            UI();
             
+            int counter = 2;
             Pole firstPole = poles[0];
-            Pole lastPole = poles[poles.Length-1];
+            Pole lastPole = poles[poles.Length - 1];
             Line lineFromFirstToLastPole = calculateLine(firstPole.xi, firstPole.hi, lastPole.xi, lastPole.hi);
 
-            for (int i = 1; i < poles.Length-1; i++)
+            for (int i = 1; i < poles.Length - 1; i++)
             {
                 Pole pole = poles[i];
                 if (!pointLiesBelowALine(pole.xi, pole.hi, lineFromFirstToLastPole))
                 {
                     counter++;
                 }
-                // else System.Console.WriteLine("{0} {1}",pole.xi, pole.hi);
             }
 
 
             return counter;
         }
-        
+
     }
 }

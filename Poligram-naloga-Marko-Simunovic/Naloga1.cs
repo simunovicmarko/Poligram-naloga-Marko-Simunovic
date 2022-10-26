@@ -4,6 +4,7 @@ namespace Naloga
     {
         // FOR TESTING PURPOSES
         private string searchString = "L?V5??E";
+        private int numberOfInputs = 3;
         private string[] dbInputs = {
             "LJV502E Miha Novak",
             "MBA60R2 Maja Kos",
@@ -121,12 +122,34 @@ namespace Naloga
             return isMatch;
         }
 
+        private void UI()
+        {
+            System.Console.WriteLine("Vnesite iskalni niz:");
+            searchString = Console.ReadLine();
+            System.Console.WriteLine("Vnesite število vnosov");
+            numberOfInputs = int.Parse(Console.ReadLine());
+            dbInputs = new string[numberOfInputs];
+            for (int i = 0; i < numberOfInputs; i++)
+            {
+                System.Console.WriteLine("Vnesite registersko številko in ime");
+                string? input = Console.ReadLine();
+                if (input != null)
+                    dbInputs[i] = input;
+            }
+        }
+
         public void execute()
         {
-            // string[] licencePlates = GenerateRandomLicencePlates();
-            string[] licencePlates = dbInputs;
-
-            foreach (string input in licencePlates)
+            try
+            {
+                UI();
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
+            foreach (string input in dbInputs)
             {
                 KeyValuePair<string, string> splitInput = Split(input);
                 if (WordMatches(splitInput.Key, searchString))
